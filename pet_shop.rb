@@ -36,6 +36,7 @@ end
 
 def find_pet_by_name(pet_shop, name)
   pet_shop[:pets].detect.each do |pet|
+    # I believe detect returns nil if it can't find the named pet; however, this seems to clash with the requirement to put 'return nil unless pet' in the optional excerise
     pet if pet[:name] == name
   end
 end
@@ -48,7 +49,6 @@ end
 
 def add_pet_to_stock(pet_shop, new_pet)
   pet_shop[:pets] << new_pet
-  pet_shop[:pets].length
 end
 
 def customer_cash(customer)
@@ -65,7 +65,6 @@ end
 
 def add_pet_to_customer(customer, new_pet)
   customer[:pets] << new_pet
-  customer[:pets].length
 end
 
 # OPTIONAL
@@ -76,6 +75,7 @@ end
 
 def sell_pet_to_customer(pet_shop, pet, customer)
   return nil unless pet
+  # I THINK what this does is return nil unless 'pet' returns some value, regardless of what that value is
   return nil unless customer_can_afford_pet(customer, pet)
   add_or_remove_cash(pet_shop, pet[:price])
   remove_customer_cash(customer, pet[:price])
